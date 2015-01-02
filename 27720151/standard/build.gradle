@@ -1,0 +1,12 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'pmd'
+
+repositories {
+   mavenCentral()
+}
+
+pmd {
+   toolVersion = "5.1.1"
+   ignoreFailures = true
+}

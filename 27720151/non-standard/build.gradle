@@ -1,0 +1,12 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'pmd'
+
+repositories {
+   flatDir { dirs 'src/main/webapp/WEB-INF/lib' }
+}
+
+dependencies {
+    providedCompile fileTree(dir: 'src/main/webapp/WEB-INF/lib', include: '*.jar')   
+    pmd fileTree(dir: 'src/main/webapp/WEB-INF/lib', include: '*.jar')   
+}
