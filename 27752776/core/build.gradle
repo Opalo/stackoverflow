@@ -1,0 +1,30 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+group = 'org.opal' //must be specified
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.3.3'
+    compile 'org.slf4j:jcl-over-slf4j:1.7.7'
+
+    testCompile 'junit:junit:4.11'
+    testCompile 'org.mockito:mockito-all:1.10.8'
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
+}
