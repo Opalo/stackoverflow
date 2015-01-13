@@ -3,6 +3,14 @@ apply plugin: 'maven-publish'
 
 group = 'group-27894707'
 
+repositories {
+   mavenCentral()
+}
+
+dependencies {
+   compile 'com.google.inject:guice:3.0'
+}
+
 jar {
     from sourceSets.main.output
     from sourceSets.main.allJava
