@@ -1,0 +1,11 @@
+apply plugin: 'groovy'
+
+repositories {
+   mavenCentral()
+}
+
+dependencies {
+   compile 'org.codehaus.groovy:groovy-all:2.3.9'
+   compile 'com.google.inject:guice:3.0'
+   compile 'com.google.inject.extensions:guice-assistedinject:3.0'
+}
