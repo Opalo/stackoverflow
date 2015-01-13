@@ -3,7 +3,8 @@ apply plugin: 'maven-publish'
 
 group = 'group-27894707'
 
-task sourceJar(type: Jar) {
+jar {
+    from sourceSets.main.output
     from sourceSets.main.allJava
 }
 
@@ -11,10 +12,6 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
-
-            artifact sourceJar {
-                classifier "sources"
-            }
         }
     }
 }
