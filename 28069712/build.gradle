@@ -1,0 +1,21 @@
+apply plugin: 'java'
+apply plugin: 'findbugs'
+
+repositories {
+   mavenCentral()
+}
+
+findbugs {
+   ignoreFailures = true
+}
+
+task checkFindBugsReport << {
+   def xmlReport = findbugsMain.reports.xml
+   def slurped = new XmlSlurper().parse(xmlReport.destination)
+   def bugsFound = slurped.BugInstance.size()
+   if (bugsFound > 0) {
+      throw new GradleException("$bugsFound FindBugs rule violations were found. See the report at: $xmlReport.destination")
+   }
+}
+
+findbugsMain.finalizedBy checkFindBugsReport
