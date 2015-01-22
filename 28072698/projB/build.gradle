@@ -1,0 +1,1 @@
+ext.resourcesDir = project.file('src/main/webapp2')
