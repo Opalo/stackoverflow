@@ -13,13 +13,27 @@ dependencies {
 
 jar {
     from sourceSets.main.output
-    from sourceSets.main.allJava
 }
 
+task jarWithSources(type: Jar) {
+	from sourceSets.main.output
+	if (gradle.startParameter.taskNames.any{it == "publishToMavenLocal"}) {
+		from sourceSets.main.allJava
+	}
+}
+
+// Define how maven-publish publishes to the nexus repository
 publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
+        }
+        // publish the <project> jar as a standalone artifact
+        mavenJar(MavenPublication) {
+            artifact jarWithSources
+	    //from components.java -- can't have both the above line and this
+            artifactId "${jar.baseName}_jar"
+            version project.version
         }
     }
 }
