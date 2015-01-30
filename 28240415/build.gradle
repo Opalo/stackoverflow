@@ -1,0 +1,20 @@
+apply plugin: 'java'
+apply plugin: 'findbugs'
+
+repositories {
+   mavenCentral()
+}
+
+findbugs {
+   effort = "max"
+   reportsDir = file("$buildDir/reports/findbugs")
+   //reportLevel = "high"
+   sourceSets = [sourceSets.main]
+}
+
+findbugsMain {
+   reports {
+     html.enabled = true
+      xml.enabled = false
+   }
+}
