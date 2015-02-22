@@ -1,0 +1,60 @@
+import de.undercouch.gradle.tasks.download.Download
+
+plugins {
+    id "de.undercouch.download" version "1.2"
+}
+apply plugin: 'java'
+
+project.ext.zipUrl = 'https://github.com/Opalo/stackoverflow/raw/master/28650976/sample.zip'
+
+//first solution - running bash script
+task download1(type: Exec) {
+   executable 'sh'
+   args 'download.sh'
+}
+
+//second solution - pure groovy
+task download2 << {
+   def file = project.file('sample2.zip')   
+   def out = new BufferedOutputStream(new FileOutputStream(file))
+   out << new URL(zipUrl).openStream()
+   out.close()
+   project.copy {
+      from zipTree(file)
+      into 'project2'
+   }
+   project.copy {
+      from project.file('project2/assets')
+      into 'assets2'
+   }
+   project.file('project2').deleteDir()
+   project.file('sample2.zip').delete()
+}
+
+//third solution - download plugin
+task download3(type: Download) {
+    def destination = new File(rootDir, 'sample3.zip')
+    src zipUrl
+    dest destination
+    doLast {
+      project.copy {
+         from zipTree(destination)
+         into 'project3'
+      }
+      project.copy {
+         from project.file('project3/assets')
+         into 'assets3'
+      }
+      project.file('project3').deleteDir()
+      project.file('sample3.zip').delete()
+    }
+}
+
+task deleteAssets << {
+   project.file('assets1').deleteDir()
+   project.file('assets2').deleteDir()
+   project.file('assets3').deleteDir()
+}
+
+test.dependsOn(download1, download2, download3)
+//test.finalizedBy(deleteAssets)
