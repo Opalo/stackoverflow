@@ -1,0 +1,54 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'checkstyle'
+
+sourceCompatibility = 1.8
+version = '1.0'
+
+configurations {
+  checkstyle64snapshot
+}
+
+checkstyleMain {
+  checkstyleClasspath = project.configurations.checkstyle64snapshot
+}
+
+task "create-dirs" << {
+  sourceSets*.java.srcDirs*.each { it.mkdirs() }
+  sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+}
+
+jar {
+  manifest {
+    attributes 'Implementation-Title': 'xyz', 
+      'Implementation-Version': 0.01
+  }
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile (
+    ['org.apache.logging.log4j:log4j-api:2.2'],
+    ['org.apache.logging.log4j:log4j-core:2.2']
+  )
+  testCompile(
+    ['junit:junit:4.11'],
+    ['org.mockito:mockito-core:1.+']
+  )
+  checkstyle64snapshot fileTree(dir: 'checkstyleLibs', include: '*.jar')
+}
+
+test {
+  systemProperties 'property': 'value'
+}
+
+uploadArchives {
+  repositories {
+    flatDir {
+      dirs 'repos'
+    }
+  }
+}
