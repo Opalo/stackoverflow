@@ -1,0 +1,36 @@
+apply plugin: 'java'
+
+test {
+   doFirst {
+      def testRes = project.file('src/test/resources/test.resources')
+      def mainRes = project.file('src/main/resources/main.resources')
+      project.copy {
+         from 'src/test/resources'
+         into 'src/test/resources'
+         include('test.resources')
+         rename {
+            'test.resources.old'
+         }
+      }
+      testRes << '\n'
+      testRes << mainRes.text
+
+      logger.lifecycle('\nmain.resources text: ')
+      logger.lifecycle(mainRes.text)
+      logger.lifecycle('\ntest.resources text: ')
+      logger.lifecycle(testRes.text)
+      logger.lifecycle('\ntest.resources.old text: ')
+      logger.lifecycle(project.file('src/test/resources/test.resources.old').text)
+   }
+
+   doLast {
+      def testOldRes = project.file('src/test/resources/test.resources.old')
+      testOldRes.renameTo(project.file('src/test/resources/test.resources'))
+
+      logger.lifecycle('\nmain.resources text: ')
+      logger.lifecycle(project.file('src/main/resources/main.resources').text)
+      logger.lifecycle('\ntest.resources text: ')
+      logger.lifecycle(project.file('src/test/resources/test.resources').text)
+      logger.lifecycle("\ntest.resources.old exists: ${project.file('src/test/resources/test.resources.old').exists()}")
+   }
+}
