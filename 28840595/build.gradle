@@ -1,0 +1,26 @@
+apply plugin: 'groovy'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+}   
+
+dependencies {
+    compile (
+        'org.codehaus.groovy:groovy-all:2.4.1',
+        'org.apache.camel:camel-core:2.14.1',
+        'org.apache.camel:camel-mail:2.14.1',
+        'org.apache.poi:poi:3.11',
+        'org.apache.poi:poi-ooxml:3.11',
+        'org.apache.commons:commons-lang3:3.3.2'
+    )
+}
+
+task execute(type:JavaExec) {
+    main = mainClass
+    classpath = sourceSets.main.runtimeClasspath
+}
