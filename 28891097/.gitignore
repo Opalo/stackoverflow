@@ -1,0 +1,8 @@
+tmp/lib_amd64/lib/file1
+tmp/lib_amd64/lib/file2
+tmp/lib_armv7/lib/file1
+tmp/lib_armv7/lib/file2
+tmp/lib_armv7s/lib/file1
+tmp/lib_armv7s/lib/file2
+tmp/lib_x86_64/lib/file1
+tmp/lib_x86_64/lib/file2

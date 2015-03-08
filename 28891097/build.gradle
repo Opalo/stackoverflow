@@ -1,0 +1,8 @@
+fileTree(dir: 'tmp').include('*.tar.gz').each { simLib ->
+   copy {
+      println "Untar $simLib.name"
+      def name = simLib.name - '.tar.gz'
+      from tarTree("tmp/${simLib.name}")
+      into "tmp/$name"       
+   }
+}
