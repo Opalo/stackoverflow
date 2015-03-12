@@ -1,0 +1,25 @@
+buildscript {
+    repositories { 
+        maven { url "http://clojars.org/repo" } 
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath "clojuresque:clojuresque:1.7.0" 
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.0'
+    }
+}
+
+apply plugin: 'clojure'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+clojure.aotCompile = true
+
+repositories {
+    maven { url "http://clojars.org/repo" }
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.clojure:clojure:1.6.0" 
+}
