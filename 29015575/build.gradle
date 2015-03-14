@@ -10,10 +10,12 @@ buildscript {
     }
 }
 
+apply plugin: 'application'
 apply plugin: 'clojure'
 apply plugin: 'com.github.johnrengelman.shadow'
 
 clojure.aotCompile = true
+mainClassName = 'hello.core'
 
 repositories {
     maven { url "http://clojars.org/repo" }
