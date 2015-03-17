@@ -1,0 +1,20 @@
+//configurations {
+//   compile.exclude module: 'spring-beans-2.0.2.jar'
+//}
+
+dependencies {
+   compile files('libs/spring-beans-4.1.5.RELEASE.jar')
+   compile(project(':projectA')) {
+      exclude module: 'spring-beans'
+   }
+}
+
+configurations.compile.each { d ->
+   println 'lol'
+   println d
+}
+
+task copyDeps(type: Copy) {
+   from configurations.compile
+   into 'deps'
+}
