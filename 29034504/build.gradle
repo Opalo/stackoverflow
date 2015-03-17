@@ -1,0 +1,17 @@
+apply plugin: 'groovy'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+    testCompile 'org.objenesis:objenesis:1.2'
+}
+
+compileJava {
+    options.compilerArgs << '-parameters'
+    options.fork = true
+    options.forkOptions.executable = 'javac'
+}
