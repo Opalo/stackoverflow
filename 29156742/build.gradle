@@ -1,0 +1,7 @@
+apply plugin: 'java'
+
+jar {
+	from('other') {
+		into('META-INF/other')
+	}
+}
