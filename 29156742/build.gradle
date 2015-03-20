@@ -1,7 +1,8 @@
 apply plugin: 'java'
 
 jar {
-	from('other') {
-		into('META-INF/other')
-	}
+   from('src/main/resources/other') {
+      into('META-INF/other')
+   }
+   exclude 'other/**'
 }
