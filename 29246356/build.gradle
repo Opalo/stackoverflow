@@ -1,0 +1,18 @@
+apply plugin: 'war'
+
+import org.apache.tools.ant.filters.ReplaceTokens
+
+project.file('cfg').listFiles().each { File file ->
+   if (file.name != 'common' && file.name != '.svn') {
+      tasks.create(name: "package$file.name", type: War, dependsOn: classes) {
+         classifier = file.name
+         from(file) {
+            into('WEB-INF/classes')
+            include "**/*"            
+            filter(ReplaceTokens, tokens: ['app.version': '2.3.1'])
+         }
+      }
+   }
+}
+
+task dist (dependsOn: tasks.matching { Task task -> task.name.startsWith("package") }) 
