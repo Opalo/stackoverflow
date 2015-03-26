@@ -2,6 +2,8 @@ apply plugin: 'war'
 
 import org.apache.tools.ant.filters.ReplaceTokens
 
+ext.version = '2.2.2'
+
 project.file('cfg').listFiles().each { File file ->
    if (file.name != 'common' && file.name != '.svn') {
       tasks.create(name: "package$file.name", type: War, dependsOn: classes) {
@@ -9,7 +11,7 @@ project.file('cfg').listFiles().each { File file ->
          from(file) {
             into('WEB-INF/classes')
             include "**/*"            
-            filter(ReplaceTokens, tokens: ['app.version': '2.3.1'])
+            filter(ReplaceTokens, tokens: ['app.version': project.ext.version])
          }
       }
    }
