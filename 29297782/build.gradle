@@ -1,0 +1,19 @@
+apply plugin: 'ear'
+
+subprojects {
+   apply plugin: 'war'
+}
+
+ear {
+  libDirName 'APP-INF/lib'
+  
+  from(project(':modc').sourceSets.main.output) {
+      into('APP-INF/classes')
+  }
+}
+
+dependencies {
+    earlib project(':moda')
+    earlib project(':modb')
+}
+
