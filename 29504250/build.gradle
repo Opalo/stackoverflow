@@ -1,0 +1,4 @@
+task copyHidden(type: Copy) {
+   from('src')
+   into('dest')
+}
