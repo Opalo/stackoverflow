@@ -3,4 +3,5 @@ apply plugin: 'java'
 task runMain(type: JavaExec) {
 	main = 'lol.Main'
 	classpath = files { project.file('libs/*') }
+	println commandLine
 }
