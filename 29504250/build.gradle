@@ -1,4 +1,4 @@
 task copyHidden(type: Copy) {
-   from('src')
+   from('src/test/resources')
    into('dest')
 }
