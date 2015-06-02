@@ -1,0 +1,4 @@
+allprojects {
+	apply plugin: 'java'
+}
+apply from: 'gradle/commonClosures.gradle'

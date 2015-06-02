@@ -1,4 +1,8 @@
+apply plugin: 'java'
+
 task copyHidden(type: Copy) {
    from('src/test/resources')
    into('dest')
 }
+
+println processResources.getClass()
