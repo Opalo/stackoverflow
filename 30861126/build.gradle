@@ -1,0 +1,9 @@
+apply plugin: 'application'
+
+mainClassName = 'lol.Main'
+
+jar {
+	manifest {
+        attributes 'Main-Class': mainClassName
+    }
+}
