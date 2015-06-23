@@ -1,0 +1,10 @@
+apply plugin: 'java'
+
+task runMain(type: JavaExec) {
+    if (project.hasProperty('serverversion')) {
+    	args(serverversion)
+    }
+    jvmArgs = ['-Xms1024m', '-Xmx1024m']
+    classpath sourceSets.main.runtimeClasspath
+	main = 'lol.Lol'
+}
