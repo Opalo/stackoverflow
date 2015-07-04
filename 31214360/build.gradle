@@ -1,0 +1,7 @@
+apply plugin: 'java'
+
+jar {
+	from('native') {
+		into('org/sqlite/native')
+	}
+}
