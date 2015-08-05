@@ -1,0 +1,17 @@
+apply plugin: 'war'
+
+task createWar(type: War)
+
+task createServerPackage(type: Zip) {
+    description = "Creates the full server.zip package for distribution."
+    dependsOn createWar
+
+    String filesDirectory = 'upgradeFiles'
+
+    from(createWar.outputs) {
+        into(filesDirectory)
+    }
+
+    archiveName 'server.zip'
+    destinationDir file(buildDir)
+}
