@@ -1,0 +1,9 @@
+apply plugin: 'java'
+
+jar {
+   def excluded = project.file('classes.txt').readLines()
+
+   exclude { f ->
+      excluded.any { e -> f.path.replaceAll(File.separator, '.').contains(e) }
+   }
+}
