@@ -1,9 +1,8 @@
 apply plugin: 'java'
 
 jar {
-   def excluded = project.file('classes.txt').readLines()
-
-   exclude { f ->
-      excluded.any { e -> f.path.replaceAll(File.separator, '.').contains(e) }
+   def included = project.file('classes.txt').readLines()
+   include { f ->
+      included.any { i -> f.isDirectory() ? true : f.path.replaceAll(File.separator, '.').contains(i) }
    }
 }
