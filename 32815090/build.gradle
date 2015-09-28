@@ -1,0 +1,23 @@
+apply plugin: 'java'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  testCompile 'junit:junit:4.12'
+}
+
+test {
+   def env = System.properties['env']
+   if (env) {
+      // in java null system property can't be set: http://stackoverflow.com/questions/4323995/set-system-propery-to-null-in-java
+      systemProperty 'env', env
+   }
+
+   def env2 = System.properties['env2']
+   if (env2) {
+      systemProperties = System.properties
+      systemProperties['env2'] = env2
+   }    
+}
