@@ -1,0 +1,18 @@
+apply plugin: 'scala'
+ 
+repositories {
+   mavenCentral()
+}
+
+dependencies {
+   compile 'org.scala-lang:scala-library:2.10.4'
+}
+
+jar {
+   baseName = 'tong'
+   version = '1.0'
+   manifest {
+      attributes 'Main-Class': 'com.tong.gradle.Log' 
+   }
+   from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
