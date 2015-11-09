@@ -1,0 +1,11 @@
+apply plugin: 'java'
+apply from: 'dependencies.gradle'
+
+dependencies {
+   compile libraries.poi
+}
+
+task cp(type: Copy) {
+   from configurations.compile
+   into 'bolo'
+}

@@ -1,0 +1,6 @@
+ext.libraries = [
+   poi: [
+      files('/Users/opal/tutorial/stackoverflow/33429597/libs/poi-3.13.jar'),
+      files('/Users/opal/tutorial/stackoverflow/33429597/libs/poi-ooxml-3.13.jar')
+   ]
+]
