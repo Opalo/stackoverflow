@@ -1,0 +1,27 @@
+buildscript {
+  repositories {
+    jcenter()
+  }
+
+  dependencies {
+    gradleApi()
+  }
+}
+
+apply plugin: org.opal.LolPlugin
+
+e {
+  property1 'value'
+
+  property2 {
+    a1 'hello'
+    a2 'bye'
+  }
+}
+
+assert 'value' == e.property1
+assert 'hello' == e.property2.a1
+assert 'bye' == e.property2.a2
+
+
+
