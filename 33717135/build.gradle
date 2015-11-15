@@ -1,0 +1,35 @@
+//TODO check arguments size etc.
+
+class SomeExtension {
+  def devConf = new SomeExtensionConf()
+
+  void methodMissing(String name, args) {
+
+    if ('dev'.equals(name)) {
+        def c = args[0]
+        c.resolveStrategy = Closure.DELEGATE_FIRST
+        c.delegate = devConf
+        c()
+    } else {
+      throw new MissingMethodException("Could not find $name method")
+    }
+  }
+
+  def getDev() {
+    devConf
+  }
+}
+
+class SomeExtensionConf {
+  def accessKey
+}
+
+project.extensions.create('some', SomeExtension)
+
+some {
+  dev {
+    accessKey = 'lol'
+  }
+}
+
+assert 'lol'.equals(some.dev.accessKey)
