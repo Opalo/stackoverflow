@@ -1,5 +1,3 @@
-//TODO check arguments size etc.
-
 class SomeExtension {
   def devConf = new SomeExtensionConf()
 

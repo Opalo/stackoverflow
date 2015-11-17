@@ -1,0 +1,42 @@
+apply plugin: SamplePlugin
+
+whatever {
+  whateverVersion = '0.6.6'
+  conf {
+    dev {}
+    qa {}
+    prod {
+      accessKey = 'prod'
+    }
+  }
+}
+
+task printWhatever << {
+  println whatever.whateverVersion
+  whatever.conf.each { c ->
+    println "$c.name -> $c.accessKey"
+  }
+}
+
+class SamplePlugin implements Plugin<Project> {
+  void apply(Project project) {
+    project.extensions.create('whatever', SampleWhatever)
+    project.whatever.extensions.conf = project.container(SampleConf)
+    project.whatever.conf.all {
+      accessKey = 'dev'
+    }
+  }
+}
+
+class SampleWhatever {
+  String whateverVersion
+}
+
+class SampleConf {
+  final String name
+  String accessKey
+
+  SampleConf(String name) {
+    this.name = name
+  }
+}
