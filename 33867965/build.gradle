@@ -1,0 +1,16 @@
+apply plugin: 'distribution'
+
+distributions {
+  release {
+    baseName 'release'
+    contents {
+      subprojects.each { p ->
+        println("bolo")
+        println(p.projectDir.toString() + "/src/main/resources/config")
+        into(p.name + "-resources") {
+          from(p.projectDir + "/src/main/resources/config")
+        }
+      }
+    }
+  }
+}
