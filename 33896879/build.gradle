@@ -1,0 +1,9 @@
+apply plugin: 'war'
+
+war {
+   def env = project.hasProperty('env') ? project.env : 'dev'
+   from("${project.rootDir}/src/main/environment/$env") {
+      include('context.xml')
+      into('META-INF')
+   }
+}
