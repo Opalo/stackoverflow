@@ -1,0 +1,47 @@
+apply plugin: BootstrapPlugin
+
+bootstrapConfig {
+    basedir = 'C:/temp/unzip'
+    shareUrl = 'http://lol.com'
+    componentList = [
+        [
+            zipName: "test1",
+            zipVersion: "_2",
+            zipNetworkLocation: "temp",
+            zipUnpackLocation: "${basedir}",
+        ],
+        [
+            zipName: "test2",
+            zipVersion: "_1",
+            zipNetworkLocation: "temp",
+            zipUnpackLocation: "${basedir}",
+        ],
+    ]
+}
+
+class BootstrapPlugin implements Plugin<Project> {
+  void apply(Project project){
+    project.extensions.create('bootstrapConfig', BootstrapConfigPluginExtension)
+    project.afterEvaluate {
+      project.task("unzipAll", dependsOn: project.tasks.matching { Task task -> task.name.startsWith("unzipSingle")}){
+        println "DOIT!"
+      }
+
+      project.bootstrapConfig.componentList.each { element ->
+        project.task("unzipSingle${element.zipName}",type: Copy) {
+          def artifactFile = new File(project.bootstrapConfig.shareUrl + "/" + element.zipNetworkLocation + "/" + element.zipName + element.zipVersion + ".zip")
+          def pathDestination = element.zipUnpackLocation + "/" + element.zipName + element.zipVersion
+          def touchFileName = pathDestination + "/" + element.zipName + element.zipVersion + ".pid"
+          from project.zipTree(artifactFile)
+          into pathDestination
+        }
+      }
+    }
+  }
+}
+
+class BootstrapConfigPluginExtension {
+    String basedir
+    String shareUrl
+    def componentList = []
+}
