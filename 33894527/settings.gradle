@@ -1,0 +1,3 @@
+include 'a', 'b'
+
+rootProject.children.each { it.name = "eventos-$it.name" }

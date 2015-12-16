@@ -1,0 +1,23 @@
+apply plugin: 'ear'
+
+subprojects {
+  apply plugin: 'war'
+  each {
+    it.tasks.withType(Jar).all { task ->
+      println it.name
+      task.archiveName = it.name - 'eventos-' + '.jar'
+    }
+    it.tasks.withType(War).all { task ->
+      task.archiveName = it.name - 'eventos-' + '.war'
+    }
+  }
+}
+
+dependencies {
+  deploy project(path: ':eventos-a', configuration: 'archives')
+  deploy project(path: ':eventos-b', configuration: 'archives')
+}
+
+ear {
+    
+}

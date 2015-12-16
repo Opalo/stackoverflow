@@ -1,4 +1,5 @@
 import com.eriwen.gradle.js.tasks.MinifyJsTask
+import com.eriwen.gradle.js.JsMinifier
 
 plugins {
   id 'com.eriwen.gradle.js' version '1.12.1'
@@ -7,9 +8,8 @@ apply plugin: LolPlugin
 
 class LolPlugin implements Plugin<Project> {
   void apply(Project p) {
-    p.task('minifyAll')
-
-    p.fileTree('.').include('*.js').eachWithIndex { f, i ->
+    p.task('minifyAll') << {
+      p.fileTree('.').include('*.js').eachWithIndex { f, i ->
         p.task("minify$i", type: MinifyJsTask) {
             source = f
             dest = "${f.name}.out"
@@ -18,3 +18,4 @@ class LolPlugin implements Plugin<Project> {
       }
     }
   }
+}
