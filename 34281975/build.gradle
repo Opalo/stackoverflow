@@ -1,0 +1,13 @@
+apply plugin: 'java'
+
+compileJava.outputs.each { o ->
+  o.files.each { f ->
+    println "o: $f"
+  }
+}
+
+compileJava.inputs.each { i ->
+  i.sourceFiles.each { f ->
+    println "i: $f"
+  }
+}

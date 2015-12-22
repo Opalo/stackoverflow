@@ -1,0 +1,23 @@
+apply plugin: 'distribution'
+
+def commonPart = { location ->
+    return {
+      into('a') {
+      from("$projectDir/src/main/config/$location/A")
+    }
+    into('b') {
+      from("$projectDir/src/main/config/$location/B")
+    }
+  }
+}
+
+distributions {
+
+    firstPackage {
+        ['shared', 'concrete-a'].collect { contents commonPart(it) }
+    }
+
+    secondPackage {
+        ['shared', 'concrete-b'].collect { contents commonPart(it) }  
+    }
+}

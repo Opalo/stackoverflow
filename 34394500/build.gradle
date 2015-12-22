@@ -1,0 +1,12 @@
+apply plugin: 'java'
+apply plugin: CustomPlugin
+
+class CustomPlugin implements Plugin<Project> {
+
+    @Override
+    void apply(Project project) {
+        project.task('createFile') << {
+            new File(project.file('src'), 'some-file').createNewFile()
+        }
+    }
+}
