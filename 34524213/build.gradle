@@ -1,0 +1,11 @@
+def doSomeAction(Project proj) {
+  println "lol: $proj"
+}
+
+subprojects {
+  task myTask {
+    doLast {
+        doSomeAction(project)
+    }
+  }
+}
