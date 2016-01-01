@@ -1,0 +1,8 @@
+apply plugin: 'java'
+
+task lol << {
+  def resourceDir = project.sourceSets.main.output.resourcesDir
+  resourceDir.eachFileRecurse(groovy.io.FileType.FILES) {
+          file -> project.logger.lifecycle("Reading file {}.", file.absolutePath - resourceDir.absolutePath)
+      }
+}

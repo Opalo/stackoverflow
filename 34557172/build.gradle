@@ -1,0 +1,43 @@
+subprojects {
+  apply plugin: 'java'
+}
+
+project(':A') {
+    apply plugin: 'war'
+
+    common(project, 'aa')
+
+    dependencies {
+        compile project(':C3')
+    }
+}
+
+project(':B') {
+    apply plugin: 'groovy'
+    common(project, 'bb')
+}
+
+def common(p, value) {
+  p.with {
+
+    ext.someVar = value
+
+    dependencies {
+        compile project(':C1')
+        compile project(':C2')
+    }
+  }
+}
+
+['A', 'B'].each { n ->
+  configure(project(":$n")) { p ->
+    task printVar << {
+      println "project -> $p.name, var -> $someVar"
+    }
+    task printDeps << {
+      p.configurations.compile.each { d ->
+        println "project -> $p.name, dependency -> $d"
+      }
+    }
+  }
+}
