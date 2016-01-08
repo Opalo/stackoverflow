@@ -1,0 +1,11 @@
+task copyRename << {
+  ['a', 'b', ].each { n ->
+    copy {
+      from(project.rootDir) {
+        include 'lol'
+        rename { "lol-$n" }
+      }
+      into('dest')
+    }
+  }
+}
