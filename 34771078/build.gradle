@@ -1,0 +1,25 @@
+apply plugin: 'idea'
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+group = 'com.sas'
+version = '0.1.0'
+
+description = "Project to test with nebula plugin."
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.6' //version required
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    compile localGroovy()
+    compile gradleApi()
+
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.3'
+    testCompile 'com.netflix.nebula:nebula-test:3.1.0'
+}
