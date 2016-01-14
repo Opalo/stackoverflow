@@ -1,0 +1,3 @@
+logging.setLevel(LogLevel.INFO)
+
+logger.info('lol')
