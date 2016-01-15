@@ -1,0 +1,17 @@
+task connectedAndroidTest << {
+  logger.lifecycle("Running $name")
+  if (project.hasProperty('lol')) {
+    throw new Exception('lol')
+  }
+}
+
+task taskX << {
+  def failure = tasks.connectedAndroidTest.state.failure
+  if(!failure) {
+    logger.lifecycle("$name is finalizer")
+  } else {
+    logger.lifecycle("$tasks.connectedAndroidTest.name failed, nothing to do.")
+  }
+}
+
+connectedAndroidTest.finalizedBy(taskX)
