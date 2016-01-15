@@ -1,0 +1,15 @@
+subprojects.findAll { it.name in ['a', 'b',] }.each { p ->
+  configure(p) {
+    apply plugin: 'java'
+  }
+}
+
+subprojects.findAll {
+  it.plugins*.class*.name.any { it.toLowerCase().contains('java')
+}.each { p ->
+  configure(p) { 
+    test {
+      testLogging.showStandardStreams = true
+    }
+  }
+}
