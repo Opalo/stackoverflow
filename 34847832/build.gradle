@@ -1,0 +1,27 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'org.ajoberstar:grgit:1.4.1'
+  }
+}
+
+import org.ajoberstar.grgit.Grgit
+
+task showLog <<{
+  def grgit = project.file('so').exists() ? Grgit.open('so') : Grgit.clone(dir: 'so', uri: 'git@github.com:Opalo/stackoverflow.git')
+  def log = grgit.log()
+
+  log.each { l ->
+
+    //https://github.com/ajoberstar/grgit/blob/master/src/main/groovy/org/ajoberstar/grgit/Commit.groovy
+    logger.lifecycle("ID: $l.id, Author: $l.author")
+  }
+
+  grgit.tag.list().each { t ->
+    //here is an object that is being passed to every iteration
+    //https://github.com/ajoberstar/grgit/blob/master/src/main/groovy/org/ajoberstar/grgit/Tag.groovy
+    logger.lifecycle("Commit: $t.commit.id, tagger: $t.tagger.email")
+  }
+}
