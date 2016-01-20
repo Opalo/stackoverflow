@@ -1,0 +1,8 @@
+dependencies {
+  testCompile(
+    [
+      libraries.junit,
+      libraries.mockito
+    ]
+  )
+}
