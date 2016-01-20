@@ -1,0 +1,22 @@
+apply plugin: 'java'
+apply plugin: 'distribution'
+
+task sourcesJar(type: Jar, dependsOn: tasks.classes) {
+    classifier 'sources'
+    from sourceSets.main.allSource
+}
+
+tasks.distZip.shouldRunAfter tasks.sourcesJar
+tasks.distTar.shouldRunAfter tasks.sourcesJar
+
+artifacts {
+    archives sourcesJar
+}
+
+distributions {
+    main {
+        contents {
+            from { tasks.sourcesJar.archivePath }
+        }
+    }
+}
