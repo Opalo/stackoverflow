@@ -1,0 +1,1 @@
+keytool -import -file littleproxy_cert -alias littleproxy -keystore $JAVA_HOME/jre/lib/security/cacerts
