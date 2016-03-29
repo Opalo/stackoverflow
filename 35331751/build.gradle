@@ -1,0 +1,9 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+def label = "2.2"
+
+task filterJS(type: Copy) {
+  from 'webapp'
+  into 'filtered'
+  filter(ReplaceTokens, tokens: [vlabel: label])
+}

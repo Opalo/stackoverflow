@@ -1,0 +1,15 @@
+task ListOfStrings(type: ExampleTask, description: 'Prove we can pass string list without parentheses') {
+    theList 'one', 'two', 'three'
+}
+public class ExampleTask extends DefaultTask {
+    List l = []
+
+    @TaskAction
+    void run() {
+      l.each { println it }
+    }
+
+    public void theList(Object... theStrings) {
+        l.addAll(theStrings)
+    }
+}
