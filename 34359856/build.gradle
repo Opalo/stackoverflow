@@ -2,7 +2,7 @@ apply plugin: BackupPlugin
 
 model {
     backup { // this is a container for all storages I want to support
-        googleDrive {
+        googleDrive(GoogleDrive) {
             clientId = ''
             clientSecret = ''
             accessToken = ''
@@ -24,7 +24,7 @@ class BackupPlugin implements Plugin<Project> {
     static class Rules extends RuleSource {
         @Model
         void backup(BackupPluginExtension backupModel) {
-          
+
         }
     }
 }
