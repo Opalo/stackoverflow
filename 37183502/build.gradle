@@ -1,0 +1,26 @@
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'application'
+
+mainClassName = 'org.opal.Elo'
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.opal.Elo'
+    }
+}
+
+repositories {
+    maven { url 'https://oss.jfrog.org/libs-snapshot' }
+}
+
+dependencies {
+    compile 'io.reactivex:rxjava:1.1.0'
+}
