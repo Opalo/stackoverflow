@@ -1,0 +1,13 @@
+ext.sharedCopyConf = { task, to ->
+  configure(task) {
+    into to
+    from 'a'
+  }
+}
+
+task copy1(type: Copy) { t ->
+  sharedCopyConf(t, 'b')
+}
+task copy2(type: Copy) { t ->
+  sharedCopyConf(t, 'c')
+}
