@@ -1,0 +1,16 @@
+apply plugin: 'java'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile 'com.google.inject:guice:4.1.0'
+}
+
+jar {
+  doFirst {
+  into('lib') {
+    from configurations.compile
+  }}
+}

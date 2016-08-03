@@ -1,0 +1,15 @@
+nginx:
+    build: ./nginx/
+    ports:
+        - 80:80
+    links:
+        - php
+    volumes:
+        - .:/var/www/html
+
+php:
+    image: php:5.6-fpm
+    expose:
+        - 9000
+    volumes:
+        - .:/var/www/html

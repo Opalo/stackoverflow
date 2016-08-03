@@ -1,0 +1,56 @@
+apply plugin: FooPlugin
+
+def info1 = "loc1"
+def info2 = "loc2"
+
+foos {
+    fee {
+        info = info1
+    }
+    fie {
+        info = info2
+    }
+}
+
+class FooPlugin implements Plugin<Project> {
+    void apply(Project project) {
+        def foos = project.container(Foo)
+        project.extensions.foos = foos
+        foos.all{foo->
+            project.tasks.create(foo.name, FooTask.class)
+            println project.tasks.getByName(foo.name)
+        }
+    }
+}
+
+class FooTask extends DefaultTask {
+    @TaskAction
+    def doStuff() {
+        println "here"
+        println project.extensions
+    }
+ }
+
+ class Foo{
+   final String name
+
+   Foo(String name) {
+       this.name = name
+   }
+
+   @Input
+   Collection<String> options = []
+
+   @Input
+   boolean recursive = true
+
+   @Input
+   File source
+
+   @Input
+   String info
+
+   @OutputDirectory
+   File target
+
+}

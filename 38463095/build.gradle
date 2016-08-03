@@ -1,0 +1,10 @@
+task copyFromCommonProject(type:Copy, dependsOn: configurations.commonProjectContent){
+    from configurations.commonProjectContent.collect{ zipTree(it) }
+    into "$buildDir"
+}
+
+task updateAnsibleTokens(type: Copy, dependsOn: copyFromCommonProject) << {
+   from "$buildDir/commons/ansible/group_vars/clients.yml"
+   into "$buildDir/commons/ansible/group_vars/"
+   expand(jmeterVersion: "$jmeterVersion")
+}
