@@ -1,0 +1,5 @@
+task copyLogs(type: Copy) {
+  from fileTree('logs').filter { it.isFile() && it.name.matches('.*_CORE.*') }
+  into 'dist'
+  includeEmptyDirs = false
+}
