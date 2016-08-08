@@ -1,0 +1,13 @@
+task all
+
+fileTree('input') {
+  include('**/*.txt')
+}.each { f ->
+  task "tar_$f.name"(type: Tar) { t ->
+    from f.parentFile
+    include f.name
+    baseName = "$f.name"
+    destinationDir = project.file('output')
+    all.dependsOn(t)
+  }
+}
