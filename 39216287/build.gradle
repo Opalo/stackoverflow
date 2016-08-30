@@ -1,0 +1,17 @@
+apply plugin: 'scala'
+repositories{
+    mavenCentral()
+    mavenLocal()
+}
+dependencies{
+    compile 'org.slf4j:slf4j-api:1.7.5'
+    compile "org.scala-lang:scala-library:2.11.2"
+    testCompile "junit:junit:4.11"
+}
+task run(type: JavaExec, dependsOn: classes) {
+    main = 'Demo'
+    classpath = sourceSets.main.runtimeClasspath
+    doFirst {
+      classpath.each { println it }
+    }
+}
