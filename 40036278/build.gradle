@@ -1,0 +1,10 @@
+apply from: 'lol.gradle'
+apply plugin: 'java'
+
+repositories { r ->
+  repos.each { n -> r."$n"() }
+}
+
+dependencies {
+  runtime groovy, hibernate
+}
