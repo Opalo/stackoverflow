@@ -1,0 +1,40 @@
+apply plugin: LibrariesPlugin
+
+libraries {
+    slf4j 'org.slf4j:slf4j-api:1.7.21'
+    junit 'junit:junit:4.12'
+}
+
+class LibrariesPlugin implements Plugin<Project> {
+    void apply(Project project) {
+        project.extensions.create("libraries", LibrariesPluginExtension)
+        project.task('printLib') {
+            doLast {
+                println "$project.libraries.slf4j"
+                println "$project.libraries.junit"
+
+                project.libraries.each {
+                  println "$it.key -> $it.value"
+                }
+            }
+        }
+    }
+}
+
+class LibrariesPluginExtension {
+
+    Map libraries = [:]
+
+    def methodMissing(String name, args) {
+        // TODO you need to do some arg checking here
+        libraries[name] = args[0]
+    }
+
+    def propertyMissing(String name) {
+        libraries[name]
+    }
+
+    Iterator iterator() {
+        libraries.iterator()
+    }
+}
