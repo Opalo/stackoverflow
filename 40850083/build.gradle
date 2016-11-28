@@ -1,0 +1,30 @@
+task a {
+  doLast {
+      println 'a'
+  }
+}
+
+task b {
+  dependsOn a
+  doLast {
+      println 'b'
+  }
+}
+
+gradle.taskGraph.whenReady { graph ->
+    if (graph.hasTask(b)) {
+        a.enabled = b.enabled = check1() && check2()
+    }
+}
+
+boolean check1() {
+  def ok = project.hasProperty('c')
+  println "check 1: ${ok ? 'PASS' : 'FAIL'}"
+  ok
+}
+
+boolean check2() {
+  def ok = project.hasProperty('d')
+  println "check 2: ${ok ? 'PASS' : 'FAIL'}"
+  ok
+}
