@@ -1,0 +1,12 @@
+apply plugin: 'java'
+
+task copyStrings(type: Copy) {
+      from '../f1'
+      into 'f2'
+      include 'strings'
+}
+
+clean.doLast {
+  project.delete('f2')
+}
+compileJava.dependsOn('copyStrings')
