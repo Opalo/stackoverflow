@@ -1,0 +1,5 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group 'org.b'
+version '1.0'

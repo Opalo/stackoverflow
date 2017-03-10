@@ -1,0 +1,7 @@
+rootProject.name = 'bla'
+includeBuild('foo') {
+    dependencySubstitution {
+        substitute module('org.b:b') with project(':foo:b')
+    }
+}
+include 'a'
