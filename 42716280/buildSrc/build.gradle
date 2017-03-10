@@ -1,0 +1,13 @@
+apply plugin: 'groovy'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile 'com.google.guava:guava:21.0'
+    compile gradleApi()
+    compile localGroovy()
+}

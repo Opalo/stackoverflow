@@ -1,0 +1,3 @@
+apply plugin: lol.LolPlugin
+
+println lol.LolStatic.lol()
