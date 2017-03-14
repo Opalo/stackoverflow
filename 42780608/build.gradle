@@ -1,0 +1,15 @@
+task clean {
+  doLast {
+    project.file('dest').deleteDir()
+  }
+}
+
+task cp(type: Copy) {
+  dependsOn clean
+  from 'mapping/envTestNormalBuild/release'
+  into 'dest'
+  include 'mapping.txt'
+  eachFile { fcp ->
+      fcp.name = "$fcp.file.parentFile.parentFile.name-$fcp.name"
+  }
+}
