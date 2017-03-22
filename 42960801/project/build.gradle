@@ -1,0 +1,29 @@
+apply plugin: 'java'
+
+repositories {
+  mavenLocal()
+}
+
+dependencies {
+  compile 'org.opal:lib:1.+'
+}
+
+def libMavenMetadataFile = repositories[0].url.toString() + "org/opal/lib/maven-metadata-local.xml"
+println libMavenMetadataFile
+def libMavenMetadataParsed = new XmlSlurper().parse(libMavenMetadataFile)
+println libMavenMetadataParsed
+def isDevAvailable = libMavenMetadataParsed.versioning.release.text() == 'dev'
+
+task printDeps {
+  doLast {
+    configurations.compile.each { println it }
+  }
+}
+
+// configurations.all {
+    // resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        // if (details.requested.group == 'org.opal' && isDevAvailable) {
+            // details.useVersion 'dev'
+        // }
+    // }
+// }
