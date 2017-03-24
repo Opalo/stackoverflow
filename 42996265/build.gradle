@@ -1,0 +1,32 @@
+apply plugin: MyPlugin
+
+apply from: 'example.gradle'
+
+class MyPlugin implements Plugin<Project> {
+    void apply(Project project) {
+        def examples = project.container(ScriptClass)
+        project.extensions.examples = examples
+    }
+}
+
+class ScriptClass {
+    String name
+    MyClass[] arrayWithObjects
+
+    ScriptClass(String name) {
+        this.name = name
+    }
+}
+
+class MyClass {
+    def var1
+    def var2
+}
+
+examples.each { e ->
+  println e.name
+  e.arrayWithObjects.each { a ->
+    println a.var1
+    println a.var2
+  }
+}
