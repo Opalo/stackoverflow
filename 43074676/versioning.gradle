@@ -1,0 +1,39 @@
+apply plugin: 'java'
+apply plugin: VersioningPlugin
+
+class VersioningPlugin implements Plugin<Project> {
+
+    @Override
+    void apply(Project project) {
+        project.extensions.create('versioning', VersioningPluginExtension)
+        project.versioning.version = getVersion()
+
+        project.afterEvaluate {
+          def newTask = project.task('writeVersionFile') {
+          inputs.property('version', project.versioning.version)
+          outputs.file(project.versioning.versionFile)
+
+          doLast {
+            def versionPropsFile = project.versioning.versionFile
+            if(!versionPropsFile.exists()) {
+            versionPropsFile.createNewFile()
+            }
+            def versionProps = new Properties()
+            versionProps.put("version", getVersion())
+            versionProps.store(versionPropsFile.newWriter(), null)
+          }
+        }
+        project.tasks.compileJava.dependsOn newTask
+      }
+    }
+
+    private String getVersion() {
+        def stdout = new ByteArrayOutputStream()
+        ['git', 'describe', '--tags'].execute().text.trim()
+    }
+}
+
+class VersioningPluginExtension {
+    File versionFile
+    String version
+}

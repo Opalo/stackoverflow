@@ -1,0 +1,9 @@
+apply from: 'versioning.gradle'
+versioning {
+  versionFile = file('my/ressource/folder/version.properties')
+}
+println(versioning.version)
+
+jar {
+  from versioning.versionFile
+}
