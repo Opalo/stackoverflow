@@ -1,0 +1,30 @@
+configurations {
+    sshAntTask
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    sshAntTask 'org.apache.ant:ant-jsch:1.7.1', 'jsch:jsch:0.1.29'
+}
+
+task cp {
+  doLast {
+    ant.taskdef(
+      name: 'scp',
+      classname: 'org.apache.tools.ant.taskdefs.optional.ssh.Scp',
+      classpath: configurations.sshAntTask.asPath
+    )
+
+    ant.scp(
+      todir: "${remoteUser}:${remoteUserPasswd}@${remoteSSHMachine}:${remoteLocation}",
+      trust:"true",
+      verbose: 'true') {
+      fileset(dir: '.') {
+        include(name: '**/**')
+      }
+    }
+  }
+}
