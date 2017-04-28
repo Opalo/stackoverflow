@@ -1,0 +1,4 @@
+task buildP2(type: GradleBuild) {
+  buildFile = '../p2/build.gradle'
+  startParameter.projectProperties = [lol: 'lol']
+}
