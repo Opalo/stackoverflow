@@ -1,0 +1,24 @@
+apply plugin: 'maven'
+
+ext {
+  pomVersion = '3.1.4.5'
+}
+
+group = 'lolgroup'
+
+task createPom {
+  outputs.file "${buildDir}/pom.xml"
+  inputs.property('group', project.group)
+  inputs.property('name', project.name)
+  inputs.property('pomVersion', project.ext.pomVersion)
+
+  doLast {
+    pom {
+      project {
+        groupId inputs.properties['group']
+        artifactId inputs.properties['name']
+        version inputs.properties['pomVersion']
+      }
+    }.writeTo("${buildDir}/pom.xml")
+  }
+}
