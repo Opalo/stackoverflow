@@ -1,1 +1,13 @@
 println project.findProperty('lol')
+
+
+def buildNumber = '10.0.0.1'
+def projectToBuild = 'projectName'
+def projectPath = "Path_till_my_Project_Dir"
+
+task executeSubProj(type: GradleBuild) {
+    buildFile = "$projectPath/$projectToBuild/build.gradle"
+    tasks = ['build']
+    startParameter.projectProperties = [buildNumber: '10.0.0.1']
+
+}
