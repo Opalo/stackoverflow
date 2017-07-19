@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+task fatJar(type: Jar) {
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+    manifest {
+        attributes 'Main-Class': 'org.Lol'
+    }
+}
+
+dependencies {
+    compile 'com.google.guava:guava:22.0'
+}
+
+task runFatJar(type: JavaExec) {
+    dependsOn fatJar
+    classpath = fatJar.outputs.files
+    main = 'org.Lol'
+}
