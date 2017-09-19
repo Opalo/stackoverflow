@@ -1,0 +1,25 @@
+task removeTestDatabaseContainer {
+  doLast {
+    println 'removeTestDatabaseContainer'
+  }
+}
+
+task startTestDatabaseContainer {
+  doLast {
+    println 'startTestDatabaseContainer'
+  }
+  finalizedBy removeTestDatabaseContainer
+}
+
+task flywayValidate { t->
+  doLast {
+    println 'flywayValidate'
+    throw new TaskExecutionException(t, new RuntimeException('whatever'))
+  }
+}
+
+task validateMigration {
+    dependsOn startTestDatabaseContainer
+    dependsOn flywayValidate
+    flywayValidate.mustRunAfter startTestDatabaseContainer
+}
