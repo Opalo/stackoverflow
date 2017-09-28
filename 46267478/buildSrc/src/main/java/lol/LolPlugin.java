@@ -1,9 +1,9 @@
 package lol;
 
-import org.gradle.api.Plugin;
-import org.gradle.api.Project;
-import org.owasp.dependencycheck.gradle.DependencyCheckPlugin;
-import org.owasp.dependencycheck.gradle.extension.DependencyCheckExtension;
+    import org.gradle.api.Plugin;
+    import org.gradle.api.Project;
+    import org.owasp.dependencycheck.gradle.DependencyCheckPlugin;
+    import org.owasp.dependencycheck.gradle.extension.DependencyCheckExtension;
 
 public class LolPlugin implements Plugin<Project> {
 
