@@ -1,0 +1,7 @@
+apply plugin: 'application'
+
+mainClassName = 'lol.Lol'
+
+startScripts {
+   applicationName = 'dc-coverage-calculator'
+}
