@@ -1,0 +1,9 @@
+apply plugin: 'ear'
+
+repositories {
+  mavenLocal()
+}
+
+dependencies {
+  deploy 'lol:lol:1.0'
+}

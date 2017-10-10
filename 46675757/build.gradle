@@ -1,0 +1,13 @@
+apply plugin: 'war'
+apply plugin: 'maven-publish'
+
+group = 'lol'
+version = '1.0'
+
+publishing {
+  publications {
+      mavenWeb(MavenPublication) {
+          from components.web
+      }
+  }
+}
