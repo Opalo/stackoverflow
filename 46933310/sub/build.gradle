@@ -1,0 +1,4 @@
+dependencies {
+  compile "com.fasterxml.jackson.dataformat:jackson-dataformat-ion:${libraries.jackson}"
+  compile "com.google.guava:guava:${guavaVersion}"
+}

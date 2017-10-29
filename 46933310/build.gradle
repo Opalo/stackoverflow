@@ -1,0 +1,20 @@
+allprojects {
+  apply plugin: 'java'
+
+  repositories {
+    mavenCentral()
+  }
+
+  ext.libraries = [jackson: '2.9.2']
+  ext.guavaVersion = '23.3-jre'
+
+  dependencies {
+    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-csv:${libraries.jackson}"
+  }
+
+}
+
+task copyLibs(type: Copy) {
+  from allprojects.configurations.compile
+  into 'lib'
+}
