@@ -1,0 +1,12 @@
+apply plugin: 'java'
+
+ext.tearDown = {
+  workingDir '.'
+  commandLine 'sh', 'whatever.sh'
+}
+
+task(type: Exec, 'whatever', tearDown)
+
+gradle.buildFinished {
+  exec tearDown
+}
