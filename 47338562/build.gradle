@@ -1,0 +1,12 @@
+apply plugin: 'groovy'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile 'io.vavr:vavr:0.9.1'
+	compile 'org.codehaus.groovy:groovy-all:2.4.12'
+
+	testCompile 'org.spockframework:spock-core:1.1-groovy-2.4'
+}
