@@ -1,0 +1,33 @@
+task clean(type: Delete) {
+  delete 'dist'
+}
+
+task task1 {
+  outputs.dir 'task1'
+  doLast {
+    project.file('task1').mkdirs()
+    project.file('task1/t1-all.jar').createNewFile()
+    project.file('task1/t1-another.jar').createNewFile()
+  }
+}
+
+task task2 {
+  outputs.dir 'task2'
+  doLast {
+    project.file('task2').mkdirs()
+    project.file('task2/lib').mkdirs()
+    project.file('task2/lib/lib.jar').createNewFile()
+    project.file('task2/t2-all.jar').createNewFile()
+    project.file('task2/t2-another.jar').createNewFile()
+  }
+}
+
+task dist(type: Copy) {
+    from task1 {
+        rename { filename -> filename.replace '-all.jar', '.jar' }
+    }
+    from task2 {
+      exclude "lib"
+    }
+    into 'dist'
+}
