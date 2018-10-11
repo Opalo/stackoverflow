@@ -1,0 +1,29 @@
+task fmpp {
+  ant.taskdef(name: 'fmpp', classname:'fmpp.tools.AntTask') {
+      classpath {
+          fileset(dir: 'lib', includes: '*.jar')
+      }
+  }
+  doLast {
+    ant.fmpp(sourceRoot:"src", outputRoot :"build") {
+        data(expandProperties: 'yes',
+"""
+  base_url: $project.base_url
+  google_analytics_number : $project.google_analytics_number
+  mail_user : $project.mail_user
+  mail_password : $project.mail_password
+  mail_recipient : $project.mail_recipient
+  upload_folder : $project.upload_folder
+  host : $project.host
+  port : $port2
+"""
+        )
+    }
+  }
+}
+
+task clean {
+  doLast {
+    project.file('build').delete()
+  }
+}

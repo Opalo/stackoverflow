@@ -1,0 +1,52 @@
+<head>
+   <?php
+       error_reporting(E_ALL);
+       ini_set('display_errors', 1);
+       $page = basename($_SERVER['PHP_SELF']);
+       require_once($_SERVER['DOCUMENT_ROOT'] . '/js/functions.php');
+   ?>
+   <title>
+       <#if title??> ${title}
+           <#else> CompSci Resources, LLC | The Complete EDGAR and XBRL Filing Platform, and more!
+       </#if>
+   </title>
+
+   <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+   <script type='text/javascript' src='${base_url}/js/bootstrap-filestyle.min.js'> </script>
+   <script type='text/javascript' src='${base_url}/js/bootstrap.min.js'></script>
+   <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jcarousel/0.3.4/jquery.jcarousel.js'></script>
+   <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jcarousel/0.3.4/jquery.jcarousel-autoscroll.min.js'></script>
+   <script type='text/javascript' src='${base_url}/js/compsci.js'></script>
+   <script type='text/javascript' src='${base_url}/js/carousel.js'></script>
+   <script type='text/javascript' src='${base_url}/js/readmore.js'></script>
+
+   <link rel='shortcut icon' href='${base_url}/images/littlelogo.png' >
+   <link rel='stylesheet' type='text/css' href='${base_url}/css/jcarousel.css' >
+   <link rel='stylesheet' type='text/css' href='${base_url}/css/bootstrap.css'>
+   <link rel='stylesheet' type='text/css' media='screen, projection' href='${base_url}/css/compsci.css'>
+
+   <style type='text/css'>
+       @media screen and (-webkit-min-device-pixel-ratio:0) {
+           h2 { font-weight: normal; }
+           .csr-services-popper-left { margin-top:11px; }
+       }
+   </style>
+
+   <!-- Google Analytics   -->
+
+   <script type='text/javascript'>
+       //Google Analytics
+                   var _gaq = _gaq || [];
+       _gaq.push(['_setAccount', '${google_analytics_number}']);
+       _gaq.push(['_trackPageview']);
+
+       (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+       })();
+   </script>
+
+   <meta charset="UTF-8">
+   <meta name="language" content="en">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
