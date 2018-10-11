@@ -1,0 +1,17 @@
+ext.dest = project.file("target-ant/tmscoreshared")
+
+task copyTmsCoreSharedFiles(type: Copy) {
+    includeEmptyDirs = false
+    from ('src/java/com/fedex/ground/tms')
+    exclude '**/dla/**'
+    exclude '**/server/**'
+    exclude '**/tcd/**'
+    into dest
+    outputs.dir(dest)
+}
+
+task clean {
+  doLast {
+    dest.delete()
+  }
+}
