@@ -1,0 +1,26 @@
+plugins {
+    id 'application'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.vavr:vavr:0.10.3'
+    annotationProcessor 'io.vavr:vavr-match-processor:0.10.3'
+
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+application {
+    mainClass = 'Example'
+}
